@@ -9,5 +9,7 @@ public class TouristAttraction {
         this.description = description;
     }
 
-
+    public String getName(){
+        return this.name;
+    }
 }

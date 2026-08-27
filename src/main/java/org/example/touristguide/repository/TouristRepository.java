@@ -9,14 +9,26 @@ import java.util.ArrayList;
 public class TouristRepository {
     ArrayList<TouristAttraction> touristAttractions = new ArrayList<>();
 
-    public TouristRepository(){
-        this.touristAttractions.add (new TouristAttraction("Den gammel rutsjebane", "En meget sjov forlystelse"));
-        this.touristAttractions.add (new TouristAttraction("Det gyldne tårn", "En skræmmende forlystelse"));
+    public TouristRepository() {
+        this.touristAttractions.add(new TouristAttraction("Den gammel rutsjebane", "En meget sjov forlystelse"));
+        this.touristAttractions.add(new TouristAttraction("Det gyldne tårn", "En skræmmende forlystelse"));
 
     }
 
 
+    public ArrayList<TouristAttraction> getAllTouristAttractions() {
+        return touristAttractions;
+    }
 
+
+    public TouristAttraction getTouristAttractionsByName(String name) {
+        for (TouristAttraction touristAttraction : touristAttractions) {
+            if (touristAttraction.getName() == name) {
+                return touristAttraction;
+            }
+        }
+        return null;
+    }
 
 
 }
