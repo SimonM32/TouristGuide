@@ -24,8 +24,8 @@ public class TouristService {
         return touristAttraction;
     }
 
-    public void addTouristAttraction(TouristAttraction touristAttraction) {
-        this.repository.add(new TouristAttraction(touristAttraction));
+    public void addTouristAttraction(String name, String description) {
+        this.repository.addTouristAttraction(new TouristAttraction(name, description));
     }
 
     public void updateTouristAttractionByName(String name, TouristAttraction touristAttraction) {
