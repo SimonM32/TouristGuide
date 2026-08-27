@@ -21,7 +21,7 @@ public class TouristRepository {
     }
 
 
-    public TouristAttraction getTouristAttractionsByName(String name) {
+    public TouristAttraction getTouristAttractionByName(String name) {
         for (TouristAttraction touristAttraction : touristAttractions) {
             if (touristAttraction.getName() == name) {
                 return touristAttraction;
