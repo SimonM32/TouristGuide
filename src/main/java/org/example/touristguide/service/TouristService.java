@@ -25,16 +25,16 @@ public class TouristService {
     }
 
     public void addTouristAttraction(String name, String description) {
-        this.repository.addTouristAttraction(new TouristAttraction(name, description));
+        this.repository.addTouristAttraction(name, description);
     }
 
-    public void updateTouristAttractionByName(String name, TouristAttraction touristAttraction) {
+   /* public void updateTouristAttractionByName(String name, TouristAttraction touristAttraction) {
         repository.updateTouristAttractionByName(name);
     }
 
     public void deleteTouristAttractionByName(String name) {
         repository.deleteTouristAttractionByName(name);
-    }
+    }*/
 
 
 }
