@@ -10,9 +10,11 @@ public class TouristRepository {
     ArrayList<TouristAttraction> touristAttractions = new ArrayList<>();
 
     public TouristRepository() {
-        this.touristAttractions.add(new TouristAttraction("Den gammel rutsjebane", "En meget sjov forlystelse"));
-        this.touristAttractions.add(new TouristAttraction("Det gyldne tarn", "En skræmmende forlystelse"));
+        this.touristAttractions.add(new TouristAttraction("Den lille havfrue", "En meget fin statue"));
+        this.touristAttractions.add(new TouristAttraction("Noma", "Der er god mad"));
         this.touristAttractions.add(new TouristAttraction("Tivoli","super sjovt"));
+        this.touristAttractions.add(new TouristAttraction("Erhvervsakademi Kobenhavn","Vores skole"));
+
     }
 
 
