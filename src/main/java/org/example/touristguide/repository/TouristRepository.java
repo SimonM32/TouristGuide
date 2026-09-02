@@ -30,7 +30,7 @@ public class TouristRepository {
         return null;
     }
 
-    public void addTouristAttraction(TouristAttraction touristAttraction){
+    public void addTouristAttraction(TouristAttraction touristAttraction) {
         touristAttractions.add(touristAttraction);
     }
 }
