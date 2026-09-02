@@ -43,6 +43,7 @@ import java.util.List;
 
 
 
+
         @DeleteMapping("delete/{name}")
         public ResponseEntity<TouristAttraction> deleteTouristAttractionByName(@PathVariable String name) {
             TouristAttraction deletedAttraction = service.deleteTouristAttractionByName(name);

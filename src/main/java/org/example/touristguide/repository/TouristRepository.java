@@ -11,9 +11,7 @@ public class TouristRepository {
 
     public TouristRepository() {
         this.touristAttractions.add(new TouristAttraction("Den gammel rutsjebane", "En meget sjov forlystelse"));
-        this.touristAttractions.add(new TouristAttraction("Det gyldne tårn", "En skræmmende forlystelse"));
-        this.touristAttractions.add(new TouristAttraction("tivoli", "forlystelse"));
-
+        this.touristAttractions.add(new TouristAttraction("Det gyldne tarn", "En skræmmende forlystelse"));
     }
 
 
