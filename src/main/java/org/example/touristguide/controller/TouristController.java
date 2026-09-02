@@ -36,8 +36,8 @@ import java.util.List;
             }
         }
         @PostMapping("add")
-        public ResponseEntity<TouristAttraction> addAttraction(@RequestBody String name, @RequestBody String description){
-             service.addTouristAttraction(name, description);
-             return ResponseEntity.status(201).body(service.getTouristAttractionByName(name));
+        public ResponseEntity<TouristAttraction> addAttraction(@RequestBody TouristAttraction touristAttraction){
+             service.addTouristAttraction(touristAttraction);
+             return ResponseEntity.status(201).body(touristAttraction);
         }
     }
