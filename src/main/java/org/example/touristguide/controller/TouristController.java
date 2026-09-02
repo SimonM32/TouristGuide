@@ -40,4 +40,16 @@ import java.util.List;
              service.addTouristAttraction(attraction);
              return ResponseEntity.status(201).body(attraction);
         }
+
+
+
+        @DeleteMapping("delete/{name}")
+        public ResponseEntity<TouristAttraction> deleteTouristAttractionByName(@PathVariable String name) {
+            TouristAttraction deletedAttraction = service.deleteTouristAttractionByName(name);
+            if(deletedAttraction != null) {
+                return ResponseEntity.ok(deletedAttraction);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        }
     }

@@ -28,13 +28,12 @@ public class TouristService {
         this.repository.addTouristAttraction(touristAttraction);
     }
 
-   /* public void updateTouristAttractionByName(String name, TouristAttraction touristAttraction) {
-        repository.updateTouristAttractionByName(name);
+
+    public TouristAttraction deleteTouristAttractionByName(String name) {
+        return repository.deleteTouristAttractionByName(name);
     }
-
-    public void deleteTouristAttractionByName(String name) {
-        repository.deleteTouristAttractionByName(name);
-    }*/
-
-
 }
+
+
+
+
