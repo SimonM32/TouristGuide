@@ -35,9 +35,20 @@ public class TouristRepository {
         touristAttractions.add(touristAttraction);
     }
 
+    public TouristAttraction updateTouristAttractionByName(String oldName, String newName, String newDescription) {
 
+        TouristAttraction touristAttraction =
+                getTouristAttractionByName(oldName);
 
+        if (touristAttraction == null) {
+            return null;
+        }
 
+        touristAttraction.setName(newName);
+        touristAttraction.setDescription(newDescription);
+        return touristAttraction;
+    }
+    
     public TouristAttraction deleteTouristAttractionByName(String name) {
         TouristAttraction attraction = getTouristAttractionByName(name);
             if(attraction != null) {

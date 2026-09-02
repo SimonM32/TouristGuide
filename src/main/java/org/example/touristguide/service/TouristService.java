@@ -28,6 +28,9 @@ public class TouristService {
         this.repository.addTouristAttraction(touristAttraction);
     }
 
+    public TouristAttraction updateTouristAttractionByName(String oldName, String newName, String newDescription) {
+        return repository.updateTouristAttractionByName(oldName, newName, newDescription);
+    }
 
     public TouristAttraction deleteTouristAttractionByName(String name) {
         return repository.deleteTouristAttractionByName(name);
