@@ -1,7 +1,7 @@
 #main-header {
-    background-color: red;
+    background-color: #D90000;
     color: white;
-    padding: 10px;
+    padding: 5px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     border-radius: 12px;
@@ -42,4 +42,43 @@
     object-fit: cover;
     border-radius: 20px;
 }
+
+.navBar {
+    display: flex;
+    gap: 100px;
+    background-color: #cc0000;
+    padding-left: 50px;
+}
+
+.navBar a {
+    color: white;
+    text-decoration: none;
+}
+
+
+    .animation {
+        animation: move 2s infinite alternate;
+    }
+
+    @keyframes move {
+        from {
+            transform: translateX(0);
+        }
+
+        to {
+            transform: translateX(1000px);
+        }
+    }
+
+    body {
+        background-image: url("images/københavn.png");
+        background-repeat: no-repeat;
+        background-size: 100% auto;
+        background-position: top center;
+    }
+
+    .hero {
+        height: 100vh;
+    }
+
 
