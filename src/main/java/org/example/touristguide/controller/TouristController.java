@@ -21,10 +21,7 @@ import java.util.List;
             this.service = touristService;
         }
 
-        @GetMapping("website")
-        public String website() {
-            return "index";
-        }
+
         @GetMapping()
         public ResponseEntity<List<TouristAttraction>> getAttractions() {
             List<TouristAttraction> attractions = service.getAllTouristAttractions();
