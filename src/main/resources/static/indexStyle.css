@@ -70,15 +70,17 @@
         }
     }
 
-    body {
+    .hero {
         background-image: url("images/københavn.png");
         background-repeat: no-repeat;
         background-size: 100% auto;
         background-position: top center;
-    }
-
-    .hero {
         height: 100vh;
     }
 
+    /*---------------------INDEX.HTML------------------------------------------------ */
+    /*---------------------ATTRACTIONLIST.HTML--------------------------------------- */
 
+table, th, td {
+    border: 1px solid black;
+}

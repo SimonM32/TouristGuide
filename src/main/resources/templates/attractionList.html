@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>attractionList</title>
+    <link rel="stylesheet" th:href="@{/indexStyle.css}">
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Attraction</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    <tr th:each="touristAttraction: ${attraction}">
+        <td th:text="${touristAttraction.name}"></td>
+        <td th:text="${touristAttraction.description}"></td>
+    </tr>
+
+    </tbody>
+
+
+
+</table>
+</body>
+</html>
