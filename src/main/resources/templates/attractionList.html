@@ -5,10 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <title>attractionList</title>
-    <link rel="stylesheet" th:href="@{/indexStyle.css}">
+    <link rel="stylesheet" th:href="@{/attractionListStyle.css}">
 </head>
 <body>
-<h1>Tourist Attractions</h1>
+<h1 class="text">Tourist Attractions</h1>
 <table>
     <thead>
     <tr>
@@ -22,12 +22,17 @@
     <tr th:each="touristAttraction: ${attraction}">
         <td th:text="${touristAttraction.name}"></td>
         <td th:text="${touristAttraction.description}"></td>
+        <td>
+            <form th:action="@{/tag}" th:object="${attraction}" method="POST">
+                <button type="submit"> Tag</button>
+            </form>
+        </td>
     </tr>
 
     </tbody>
-
-
-
 </table>
+
+<button type="submit">Tilføj attraktion</button>
+
 </body>
 </html>

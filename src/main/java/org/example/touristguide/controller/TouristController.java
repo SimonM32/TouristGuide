@@ -20,6 +20,11 @@ import java.util.List;
             this.service = touristService;
         }
 
+        @PostMapping("/tag")
+        public String tags() {
+            return "tags";
+        }
+
         @GetMapping("attractions")
         public String getAttractions(Model model) {
             model.addAttribute("attraction", service.getAllTouristAttractions());
