@@ -8,7 +8,9 @@
     <link rel="stylesheet" th:href="@{/attractionListStyle.css}">
 </head>
 <body>
+
 <h1 class="text">Tourist Attractions</h1>
+
 <table>
     <thead>
     <tr>
@@ -18,20 +20,20 @@
     </thead>
 
     <tbody>
-
-    <tr th:each="touristAttraction: ${attraction}">
+    <tr th:each="touristAttraction: ${attractions}">
         <td th:text="${touristAttraction.name}"></td>
         <td th:text="${touristAttraction.description}"></td>
         <td>
-            <form th:action="@{/tag}" th:object="${attraction}" method="POST">
+            <form th:action="@{/attractions/{name}/tags (name=${touristAttraction.name})}" method="GET">
                 <button type="submit"> Tag</button>
             </form>
         </td>
     </tr>
-
     </tbody>
 </table>
+
 <br>
+
 <button type="submit">Tilføj attraktion</button>
 
 </body>

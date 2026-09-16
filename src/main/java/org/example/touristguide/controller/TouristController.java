@@ -20,16 +20,21 @@ import java.util.List;
             this.service = touristService;
         }
 
-        @PostMapping("/tag")
-        public String tags() {
+        @GetMapping("/attractions/{name}/tags")
+        public String tags(Model model, @PathVariable String name) {
+            model.addAttribute("attraction", service.getTouristAttractionByName(name));
             return "tags";
         }
 
         @GetMapping("attractions")
         public String getAttractions(Model model) {
-            model.addAttribute("attraction", service.getAllTouristAttractions());
+            model.addAttribute("attractions", service.getAllTouristAttractions());
             return "attractionList";
         }
+
+
+
+
 
         @GetMapping("/attractions/{name}")
         public ResponseEntity<TouristAttraction> getAttractionByName(@PathVariable String name){
