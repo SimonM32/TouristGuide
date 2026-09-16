@@ -4,21 +4,20 @@ import org.example.touristguide.model.TouristAttraction;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class TouristRepository {
-    ArrayList<TouristAttraction> touristAttractions = new ArrayList<>();
-
-    public TouristRepository() {
-        this.touristAttractions.add(new TouristAttraction("Den lille havfrue", "En meget fin statue"));
-        this.touristAttractions.add(new TouristAttraction("Noma", "Der er god mad"));
-        this.touristAttractions.add(new TouristAttraction("Tivoli","super sjovt"));
-        this.touristAttractions.add(new TouristAttraction("Erhvervsakademi Kobenhavn","Vores skole"));
-
-    }
+    private List<TouristAttraction> touristAttractions = new ArrayList<>(List.of(
+            new TouristAttraction("Den lille havfrue", "En meget fin statue","København", List.of("Historie")),
+            new TouristAttraction("Noma", "Der er god mad","København",List.of("Mad og drikke")),
+            new TouristAttraction("Tivoli","super sjovt","København",List.of("Forlystelser","Mad og drikke")),
+            new TouristAttraction("Erhvervsakademi Kobenhavn","Vores skole","København",List.of("Akademi"))
+            ));
 
 
-    public ArrayList<TouristAttraction> getAllTouristAttractions() {
+
+    public List<TouristAttraction> getAllTouristAttractions() {
         return touristAttractions;
     }
 

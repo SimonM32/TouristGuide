@@ -29,10 +29,10 @@ public class TouristControllerTest {
     void shouldReturnAttractions() throws Exception {
 
         List<TouristAttraction> attractions = List.of(
-                new TouristAttraction("Den lille havfrue", "En meget fin statue"),
-                new TouristAttraction("Noma", "Der er god mad"),
-                new TouristAttraction("Tivoli", "super sjovt"),
-                new TouristAttraction("Erhvervsakademi Kobenhavn", "Vores skole")
+                new TouristAttraction("Den lille havfrue", "En meget fin statue","København",List.of("Historie")),
+                new TouristAttraction("Noma", "Der er god mad","København", List.of("Mad og drikke")),
+                new TouristAttraction("Tivoli", "super sjovt","København", List.of("Forlystelser")),
+                new TouristAttraction("Erhvervsakademi Kobenhavn", "Vores skole","København", List.of("Akademi"))
         );
 
         when(touristService.getAllTouristAttractions()).thenReturn(attractions);
@@ -49,7 +49,7 @@ public class TouristControllerTest {
     @Test
     void shouldAddAttraction() throws Exception {
 
-        TouristAttraction attractions = new TouristAttraction("Tivoli", "super sjovt");
+        TouristAttraction attractions = new TouristAttraction("Tivoli", "super sjovt","København",List.of());
 
 
     }
