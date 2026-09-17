@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
-
+//Det her er en test simon. slap nu af.
 
     @Controller
     public class TouristController {
