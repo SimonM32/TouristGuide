@@ -5,18 +5,19 @@
 <head>
     <meta charset="UTF-8">
     <title> Tags </title>
+    <link rel="stylesheet" th:href="@{/attractionListStyle.css}">
 </head>
 <body>
 
-<h1 th:text="${attraction.name}"> f </h1>h1>
+<h1 th:text="${attraction.name}"></h1>
 
 <table>
     <tbody>
-    <td th:text="{attraction.}"></td>
+    <tr th:each="tag: ${attraction.tags}">
+        <td th:text="${tag}"></td>
+    </tr>
     </tbody>
 </table>
-
-
 
 </body>
 </html>
