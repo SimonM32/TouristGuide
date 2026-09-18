@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 
 public class TouristService {
-    private TouristRepository repository;
+    private final TouristRepository repository;
 
     public TouristService(TouristRepository repository) {
         this.repository = repository;
@@ -20,8 +20,8 @@ public class TouristService {
     }
 
     public TouristAttraction getTouristAttractionByName(String name) {
-        TouristAttraction touristAttraction = repository.getTouristAttractionByName(name);
-        return touristAttraction;
+        return repository.getTouristAttractionByName(name);
+
     }
 
     public void addTouristAttraction(TouristAttraction touristAttraction) {

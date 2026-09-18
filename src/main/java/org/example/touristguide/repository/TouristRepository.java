@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public class TouristRepository {
-    private List<TouristAttraction> touristAttractions = new ArrayList<>(List.of(
+    private final List<TouristAttraction> touristAttractions = new ArrayList<>(List.of(
             new TouristAttraction("Den lille havfrue", "En meget fin statue","København", List.of("Historie")),
             new TouristAttraction("Noma", "Der er god mad","København",List.of("Mad og drikke")),
             new TouristAttraction("Tivoli","super sjovt","København",List.of("Forlystelser","Mad og drikke")),
