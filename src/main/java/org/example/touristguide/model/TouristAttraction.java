@@ -8,6 +8,10 @@ public class TouristAttraction {
     private String city;
     private List<String> tags;
 
+    public TouristAttraction() {
+
+    }
+
     public TouristAttraction(String name, String description, String city, List<String> tags) {
         this.name = name;
         this.description = description;

@@ -25,7 +25,7 @@
         <td th:text="${touristAttraction.description}"></td>
         <td>
             <form th:action="@{/attractions/{name}/tags (name=${touristAttraction.name})}" method="GET">
-                <button type="submit"> Tag</button>
+                <button type="submit"> Tag</button> <!-- Måske OGSÅ ændre knappen til a href link til ny hjemmeside -->
             </form>
         </td>
     </tr>

@@ -32,6 +32,14 @@ import java.util.List;
             return "attractionList";
         }
 
+        @GetMapping("/add")
+        public String addAttractionForm(Model model) {
+            model.addAttribute("addedAttraction", new TouristAttraction());
+            return "addAttraction";
+        }
+
+
+
 //develop
 
 
