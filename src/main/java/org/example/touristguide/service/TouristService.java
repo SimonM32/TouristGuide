@@ -15,6 +15,14 @@ public class TouristService {
         this.repository = repository;
     }
 
+    public List<String> getCities() {
+        return repository.getCities();
+    }
+
+    public List<String> getTags() {
+        return repository.getTags();
+    }
+
     public List<TouristAttraction> getAllTouristAttractions() {
         return repository.getAllTouristAttractions();
     }

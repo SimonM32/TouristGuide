@@ -8,7 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-    @Controller
+import java.util.List;
+
+@Controller
     public class TouristController {
         private final TouristService service;
 
@@ -30,13 +32,33 @@ import org.springframework.web.bind.annotation.*;
 
         @GetMapping("/add")
         public String addAttractionForm(Model model) {
-            model.addAttribute("addedAttraction", new TouristAttraction());
+            List<String> startTags = service.getTags(); // Måske ikke bruge linje
+            TouristAttraction touristAttraction = new TouristAttraction();
+            touristAttraction.setTags(startTags); // Måske ikke bruge linje
+            model.addAttribute("allTags", service.getTags());
+
+            model.addAttribute("addedAttraction", touristAttraction);
+            model.addAttribute("allCities", service.getCities());
             return "addAttraction";
+        }
+
+        @PostMapping("/save")
+        public String saveAttractionForm(@ModelAttribute TouristAttraction touristAttraction) {
+            service.addTouristAttraction(touristAttraction);
+            return "redirect:/attractions";
+        }
+
+        @GetMapping("/{name}edit")
+        public String editAttraction(@PathVariable String name, Model model) {
+            model.addAttribute("editedAttraction", service.getTouristAttractionByName(name));
+            return"editAttraction";
         }
 
 
 
+
 //develop
+
 
 
 

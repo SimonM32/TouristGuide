@@ -15,6 +15,27 @@ public class TouristRepository {
             new TouristAttraction("Erhvervsakademi Kobenhavn","Vores skole","København",List.of("Akademi"))
             ));
 
+    public List<String> allCities = List.of(
+            "København",
+            "Aarhus",
+            "Aalborg"
+    );
+
+    public List<String> allTags = List.of(
+            "Historie",
+            "Mad og drikke",
+            "Forlystelser",
+            "Akademi"
+    );
+
+    public List<String> getCities() {
+        return allCities;
+    }
+
+    public List<String> getTags() {
+        return allTags;
+    }
+
 
 
     public List<TouristAttraction> getAllTouristAttractions() {
