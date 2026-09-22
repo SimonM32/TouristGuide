@@ -40,6 +40,10 @@ public class TouristService {
         return repository.updateTouristAttractionByName(oldName, newName, newDescription);
     }
 
+    public TouristAttraction updateAttraction(String oldName, TouristAttraction updatedAttraction) {
+        return repository.updateAttraction(oldName, updatedAttraction);
+    }
+
     public TouristAttraction deleteTouristAttractionByName(String name) {
         return repository.deleteTouristAttractionByName(name);
     }

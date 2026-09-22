@@ -16,6 +16,7 @@
     <tr>
         <th>Attraction</th>
         <th>Description</th>
+        <th>City</th>
     </tr>
     </thead>
 
@@ -23,10 +24,12 @@
     <tr th:each="touristAttraction: ${attractions}">
         <td th:text="${touristAttraction.name}"></td>
         <td th:text="${touristAttraction.description}"></td>
+        <td th:text="${touristAttraction.city}"></td>
         <td>
-            <form th:action="@{/attractions/{name}/tags (name=${touristAttraction.name})}" method="GET">
-                <button type="submit"> Tag</button> <!-- Måske OGSÅ ændre knappen til a href link til ny hjemmeside -->
-            </form>
+            <a th:href="@{/{name}/edit(name=${touristAttraction.name})}">Opdater</a>
+        </td>
+        <td>
+            <a th:href="@{/attractions/{name}/tags(name=${touristAttraction.name})}"> Taaags</a>
         </td>
     </tr>
     </tbody>
