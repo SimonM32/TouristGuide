@@ -69,6 +69,20 @@ public class TouristRepository {
         touristAttraction.setDescription(newDescription);
         return touristAttraction;
     }
+
+    public TouristAttraction updateAttraction(String oldName, TouristAttraction updatedAttraction) {
+        for (TouristAttraction t : touristAttractions) {
+            if (t.getName().equalsIgnoreCase(oldName)) {
+                t.setName(updatedAttraction.getName());
+                t.setDescription(updatedAttraction.getDescription());
+                t.setCity(updatedAttraction.getCity());
+                t.setTags(updatedAttraction.getTags());
+                return t;
+            }
+        }
+        return null;
+    }
+
     
     public TouristAttraction deleteTouristAttractionByName(String name) {
         TouristAttraction attraction = getTouristAttractionByName(name);

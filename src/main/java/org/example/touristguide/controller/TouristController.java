@@ -48,12 +48,19 @@ import java.util.List;
             return "redirect:/attractions";
         }
 
-        @GetMapping("/{name}edit")
+        @GetMapping("/{name}/edit")
         public String editAttraction(@PathVariable String name, Model model) {
             model.addAttribute("editedAttraction", service.getTouristAttractionByName(name));
-            return"editAttraction";
+            model.addAttribute("allCities", service.getCities());
+            model.addAttribute("allTags", service.getTags());
+            return "updateAttraction";
         }
 
+        @PostMapping("/update")
+        public String updateAttraction(@ModelAttribute TouristAttraction updatedAttraction, @RequestParam String oldName) {
+            service.updateAttraction(oldName,updatedAttraction);
+            return "redirect:/attractions";
+        }
         @PostMapping("/attractions/{name}/delete")
         public String deleteAttraction(@PathVariable String name, Model model){
             TouristAttraction deleted = service.deleteTouristAttractionByName(name);
