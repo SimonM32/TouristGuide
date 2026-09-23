@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="da"
+      xmlns:th="https://www.thymeleaf.org"
+>
+<head>
+  <meta charset="UTF-8">
+  <title>NavBar</title>
+  <link rel="stylesheet" th:href="@{/indexStyle.css}">
+  <link rel="stylesheet" th:href="@{/mainHeader.css}">
+
+</head>
+<body>
+
+  <div class="navBar" th:fragment="navbar">
+    <h1><a th:href="@{/}">Forside</a></h1>
+    <h3><a th:href="@{/attractions}">Vores Attraktioner</a></h3>
+    <h3>Transport</h3>
+    <h3>Om os</h3>
+    <h3>Kontakt os</h3>
+  </div>

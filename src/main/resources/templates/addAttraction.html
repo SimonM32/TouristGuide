@@ -5,10 +5,11 @@
 <head>
     <meta charset="UTF-8">
     <title> addAttraction</title>
-    <link rel="stylesheet" th:href="@{/main.css}">
+    <link rel="stylesheet" th:href="@{/addAttraction.css}">
+    <link rel="stylesheet" th:href="@{/mainHeader.css}">
 </head>
 <body>
-
+<div th:replace="~{fragments :: navbar}"></div>
 <h1> Tilføj turistattraktion </h1>
 <div class="form">
 <form th:action="@{/save}"  th:object="${addedAttraction}" method="POST">

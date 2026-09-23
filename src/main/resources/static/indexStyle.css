@@ -1,3 +1,4 @@
+/*
 #main-header {
     background-color: #D90000;
     color: white;
@@ -6,7 +7,7 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     border-radius: 12px;
 }
-
+*/
 .grid-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -17,7 +18,7 @@
 .box {
     background-color: #f8f9fa;
     border: 2px solid red;
-    border-radius: 10px;
+    border-radius: 1px;
     padding: 20px;
 }
 
@@ -42,7 +43,7 @@
     object-fit: cover;
     border-radius: 20px;
 }
-
+/*
 .navBar {
     display: flex;
     gap: 100px;
@@ -54,8 +55,8 @@
     color: white;
     text-decoration: none;
 }
-
-
+*/
+/*
     .animation {
         animation: move 2s infinite alternate;
     }
@@ -69,7 +70,7 @@
             transform: translateX(1000px);
         }
     }
-
+*/
     .hero {
         background-image: url("images/københavn.png");
         background-repeat: no-repeat;
