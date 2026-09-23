@@ -9,10 +9,18 @@ import java.util.List;
 @Service
 
 public class TouristService {
-    private TouristRepository repository;
+    private final TouristRepository repository;
 
     public TouristService(TouristRepository repository) {
         this.repository = repository;
+    }
+
+    public List<String> getCities() {
+        return repository.getCities();
+    }
+
+    public List<String> getTags() {
+        return repository.getTags();
     }
 
     public List<TouristAttraction> getAllTouristAttractions() {
@@ -20,8 +28,8 @@ public class TouristService {
     }
 
     public TouristAttraction getTouristAttractionByName(String name) {
-        TouristAttraction touristAttraction = repository.getTouristAttractionByName(name);
-        return touristAttraction;
+        return repository.getTouristAttractionByName(name);
+
     }
 
     public void addTouristAttraction(TouristAttraction touristAttraction) {
@@ -30,6 +38,10 @@ public class TouristService {
 
     public TouristAttraction updateTouristAttractionByName(String oldName, String newName, String newDescription) {
         return repository.updateTouristAttractionByName(oldName, newName, newDescription);
+    }
+
+    public TouristAttraction updateAttraction(String oldName, TouristAttraction updatedAttraction) {
+        return repository.updateAttraction(oldName, updatedAttraction);
     }
 
     public TouristAttraction deleteTouristAttractionByName(String name) {

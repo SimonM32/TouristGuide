@@ -16,6 +16,7 @@
     <tr>
         <th>Attraction</th>
         <th>Description</th>
+        <th>City</th>
     </tr>
     </thead>
 
@@ -23,9 +24,17 @@
     <tr th:each="touristAttraction: ${attractions}">
         <td th:text="${touristAttraction.name}"></td>
         <td th:text="${touristAttraction.description}"></td>
+        <td th:text="${touristAttraction.city}"></td>
         <td>
-            <form th:action="@{/attractions/{name}/tags (name=${touristAttraction.name})}" method="GET">
-                <button type="submit"> Tag</button>
+            <a th:href="@{/{name}/edit(name=${touristAttraction.name})}">Opdater</a>
+        </td>
+        <td>
+            <a th:href="@{/attractions/{name}/tags(name=${touristAttraction.name})}"> Taaags</a>
+        </td>
+        <td>
+            <form th:action="@{/attractions/{name}/delete (name=${touristAttraction.name})}" method="POST"
+            onsubmit="return confirm('er du sikker på at du vil slette attraktionen?')">
+                <button type="submit"> Delete</button>
             </form>
         </td>
     </tr>
@@ -33,8 +42,8 @@
 </table>
 
 <br>
-
-<button type="submit">Tilføj attraktion</button>
-
+<div class="button-row">
+<a th:href="@{/add}" class="button"> Tilføj Attraktion</a> <!-- Class button styling gider ikke at virke-->
+</div>
 </body>
 </html>

@@ -8,11 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
-
-    @Controller
+@Controller
     public class TouristController {
         private final TouristService service;
 
@@ -32,6 +30,48 @@ import java.util.List;
             return "attractionList";
         }
 
+        @GetMapping("/add")
+        public String addAttractionForm(Model model) {
+            List<String> startTags = service.getTags(); // Måske ikke bruge linje
+            TouristAttraction touristAttraction = new TouristAttraction();
+            touristAttraction.setTags(startTags); // Måske ikke bruge linje
+            model.addAttribute("allTags", service.getTags());
+
+            model.addAttribute("addedAttraction", touristAttraction);
+            model.addAttribute("allCities", service.getCities());
+            return "addAttraction";
+        }
+
+        @PostMapping("/save")
+        public String saveAttractionForm(@ModelAttribute TouristAttraction touristAttraction) {
+            service.addTouristAttraction(touristAttraction);
+            return "redirect:/attractions";
+        }
+
+        @GetMapping("/{name}/edit")
+        public String editAttraction(@PathVariable String name, Model model) {
+            model.addAttribute("editedAttraction", service.getTouristAttractionByName(name));
+            model.addAttribute("allCities", service.getCities());
+            model.addAttribute("allTags", service.getTags());
+            return "updateAttraction";
+        }
+
+        @PostMapping("/update")
+        public String updateAttraction(@ModelAttribute TouristAttraction updatedAttraction, @RequestParam String oldName) {
+            service.updateAttraction(oldName,updatedAttraction);
+            return "redirect:/attractions";
+        }
+        @PostMapping("/attractions/{name}/delete")
+        public String deleteAttraction(@PathVariable String name, Model model){
+            TouristAttraction deleted = service.deleteTouristAttractionByName(name);
+            model.addAttribute("deletedAttraction", deleted);
+            return "deleted";
+        }
+
+
+
+
+//develop
 
 
 
