@@ -28,13 +28,19 @@
                 <button type="submit"> Tag</button> <!-- Måske OGSÅ ændre knappen til a href link til ny hjemmeside -->
             </form>
         </td>
+        <td>
+            <form th:action="@{/attractions/{name}/delete (name=${touristAttraction.name})}" method="POST"
+            onsubmit="return confirm('er du sikker på at du vil slette attraktionen?')">
+                <button type="submit"> Delete</button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>
 
 <br>
-
+<div class="button-row">
 <a th:href="@{/add}" class="button"> Tilføj Attraktion</a> <!-- Class button styling gider ikke at virke-->
-
+</div>
 </body>
 </html>
