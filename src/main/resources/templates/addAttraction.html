@@ -5,12 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <title> addAttraction</title>
-    <link rel="stylesheet" th:href="@{/addAttraction.css}">
+    <link rel="stylesheet" th:href="@{/main.css}">
 </head>
 <body>
 
 <h1> Tilføj turistattraktion </h1>
-
+<div class="form">
 <form th:action="@{/save}"  th:object="${addedAttraction}" method="POST">
     <label for="1"> Navn: </label>
     <input type="text" id="1" th:field="*{name}"/>
@@ -30,6 +30,7 @@
     <button type="submit"> OK </button>
     <a th:href="@{/attractions}"> Fortryd</a>
 </form>
+</div>
 
 </body>
 </html>

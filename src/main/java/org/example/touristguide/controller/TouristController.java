@@ -61,6 +61,13 @@ import java.util.List;
             service.updateAttraction(oldName,updatedAttraction);
             return "redirect:/attractions";
         }
+        @PostMapping("/attractions/{name}/delete")
+        public String deleteAttraction(@PathVariable String name, Model model){
+            TouristAttraction deleted = service.deleteTouristAttractionByName(name);
+            model.addAttribute("deletedAttraction", deleted);
+            return "deleted";
+        }
+
 
 
 
