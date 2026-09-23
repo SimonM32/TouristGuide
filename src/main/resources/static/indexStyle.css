@@ -1,13 +1,7 @@
-/*
-#main-header {
-    background-color: #D90000;
-    color: white;
-    padding: 5px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    border-radius: 12px;
+body {
+    margin: 0;
+    padding: 0;
 }
-*/
 .grid-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -16,7 +10,7 @@
 }
 
 .box {
-    background-color: #f8f9fa;
+    background-color: #ffe6f0;
     border: 2px solid red;
     border-radius: 1px;
     padding: 20px;
@@ -43,19 +37,6 @@
     object-fit: cover;
     border-radius: 20px;
 }
-/*
-.navBar {
-    display: flex;
-    gap: 100px;
-    background-color: #cc0000;
-    padding-left: 50px;
-}
-
-.navBar a {
-    color: white;
-    text-decoration: none;
-}
-*/
 /*
     .animation {
         animation: move 2s infinite alternate;
