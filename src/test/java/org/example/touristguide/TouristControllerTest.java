@@ -4,6 +4,7 @@ import org.example.touristguide.controller.TouristController;
 import org.example.touristguide.model.TouristAttraction;
 import org.example.touristguide.service.TouristService;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
@@ -11,10 +12,15 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 
 @WebMvcTest(TouristController.class)
 public class TouristControllerTest {
@@ -49,8 +55,22 @@ public class TouristControllerTest {
     @Test
     void shouldAddAttraction() throws Exception {
 
-        TouristAttraction attractions = new TouristAttraction("Tivoli", "super sjovt","København",List.of());
+        TouristAttraction attraction = new TouristAttraction("Simon", "super kedelig","København",List.of("Forlystelser"));
 
-        
+        mockMvc.perform(post("/save")
+                .param("name","Simon")
+                .param("description", "super kedelig")
+                .param("city", "København")
+                .param("tags", "Forlystelser"))
+                .andExpect(redirectedUrl("/attractions"));
+
+        ArgumentCaptor<TouristAttraction> captor = ArgumentCaptor.forClass(TouristAttraction.class);
+        verify(touristService).addTouristAttraction(captor.capture());
+
+        TouristAttraction captured = captor.getValue();
+        assertEquals("Simon", captured.getName());
+        assertEquals("super kedelig", captured.getDescription());
+        assertEquals("København", captured.getCity());
+        assertEquals("Forlystelser", captured.getTags());
     }
 }
