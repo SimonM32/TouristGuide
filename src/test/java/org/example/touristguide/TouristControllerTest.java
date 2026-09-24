@@ -51,6 +51,6 @@ public class TouristControllerTest {
 
         TouristAttraction attractions = new TouristAttraction("Tivoli", "super sjovt","København",List.of());
 
-
+        
     }
 }
