@@ -30,7 +30,7 @@
             <a th:href="@{/{name}/edit(name=${touristAttraction.name})}">Opdater</a>
         </td>
         <td>
-            <a th:href="@{/attractions/{name}/tags(name=${touristAttraction.name})}"> Taaags</a>
+            <a th:href="@{/attractions/{name}/tags(name=${touristAttraction.name})}"> Tags</a>
         </td>
         <td>
             <form th:action="@{/attractions/{name}/delete (name=${touristAttraction.name})}" method="POST"
