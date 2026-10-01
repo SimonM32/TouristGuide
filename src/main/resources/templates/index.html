@@ -6,6 +6,7 @@
   <meta charset="UTF-8">
   <title>TuristGuide</title>
   <link rel="stylesheet" th:href="@{/indexStyle.css}">
+  <link rel="stylesheet" th:href="@{/mainHeader.css}">
 
 </head>
 <body>
@@ -14,14 +15,16 @@
   <header id="main-header">
     <h1>Turist Guide</h1>
   </header>
-
-<div class="navBar">
-  <h3> Vores Attraktioner</h3>
-  <h3>Transport</h3>
-  <h3>Om os</h3>
-  <h3>Kontakt os</h3>
-</div>
-</div>
+  <div th:replace="~{fragments :: navbar}"></div>
+  <!--
+  <div class="navBar">
+    <h3> Vores Attraktioner</h3>
+    <h3>Transport</h3>
+    <h3>Om os</h3>
+    <h3>Kontakt os</h3>
+  </div>
+    -->
+  </div>
 
 <h2>Velkommen til Københavns turist guide. Her kan du finde nogle af de mest populære <a href=/attractions> seværdigheder</a> i København.</h2>
 <ul>
@@ -34,7 +37,7 @@
 <div class="grid-container">
 
   <div class="box">
-      <h3> <a href="/attractions/Tivoli"> Tivoli</a> </h3>
+      <h3> <a href="@{/attractions/Tivoli}"> Tivoli</a> </h3>
   </div>
 
   <div class="box">
@@ -55,22 +58,22 @@
 
   <div>
     <h1>Tivoli</h1>
-    <img src="../static/images/tivoli.jpg" alt="picture 1"/>
+    <img th:src="@{/images/tivoli.jpg}" alt="picture 1"/>
   </div>
 
   <div>
     <h1>Den Lille Havfrue</h1>
-    <img src="../static/images/denlillehavfrue.jpg" alt="picture 2"/>
+    <img th:src="@{/images/denlillehavfrue.jpg}" alt="picture 2"/>
   </div>
 
   <div>
-    <h1>Nemo</h1>
-    <img src="../static/images/noma.jpeg" alt="picture 3"/>
+    <h1>Nomo</h1>
+    <img th:src="@{/images/noma.jpeg}" alt="picture 3"/>
   </div>
 
   <div>
     <h1>Erhvervsakademi Kobenhavn</h1>
-    <img src="../static/images/skole.png" alt="picture 4"/>
+    <img th:src="@{/images/skole.png}" alt="picture 4"/>
   </div>
 
 </div>
@@ -78,16 +81,16 @@
 
   <h2> Tivoli </h2>
   <p> <a href=/attractions/Tivoli> Tivoli</a> er en af verdens ældste forlystelsesparker. </p>
-  <img src="../static/images/tivoli.jpg" alt="billede af tivoli" height="534" width="600"/>
+  <img th:src="@{/images/tivoli.jpg}" alt="billede af tivoli" height="534" width="600"/>
 
   <h2> Den lille havfrue </h2>
     <p class="highlight"> Den lille havfrue er kendt fra H.C. Andersen fortællinger. </p>
-  <img src="../static/images/denlillehavfrue.jpg" alt="billede af den lille havfrue" height="450" width="300"/>
+  <img th:src="@{/images/denlillehavfrue.jpg}" alt="billede af den lille havfrue" height="450" width="300"/>
 
 
   <h2> Noma </h2>
   <p class="highlight"> Noma er en populær michelin restaurant. Forkortelsen står for Nordisk Mad. </p>
-  <img src="../static/images/noma.jpeg" alt="billede af noma" height="500" width="600"/>
+  <img th:src="@{/images/noma.jpg}" alt="billede af noma" height="500" width="600"/>
 
 <h2> Eksterne Links </h2>
 <p> <a href=http://www.rejseplanen.dk> Rejseplanen</a> </p>
@@ -95,11 +98,11 @@
 
 
 
-
+<!--
 <div class="move animation">
   <img src="../static/images/tivoli.jpg" alt="billede af tivoli" height="534" width="600"/>
 </div>
-
+-->
 </body>
 
 <footer> Kontakt tlf: Sveinur 20304050 </footer>
