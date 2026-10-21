@@ -1,0 +1,22 @@
+#main-header {
+    background-color: #4169E1;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+.navBar {
+    display: flex;
+    gap: 100px;
+    background-color: #4169E1;
+    padding-left: 50px;
+}
+
+.navBar a {
+    color: white;
+    text-decoration: none;
+}
+body {
+    margin: 0;
+    padding: 0;
+}

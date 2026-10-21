@@ -5,12 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <title> Tags </title>
-    <link rel="stylesheet" th:href="@{/attractionListStyle.css}">
+    <link rel="stylesheet" th:href="@{/addAttaction.css}">
 </head>
 <body>
-
-<h1 th:text="${attraction.name}"></h1>
-
+<div class="form">
+    <div class="text">
+        <h1 th:text="${attraction.name}"></h1>
+    </div>
+    <div class="field">
 <table>
     <tbody>
     <tr th:each="tag: ${attraction.tags}">
@@ -18,9 +20,12 @@
     </tr>
     </tbody>
 </table>
-<form th:action="@{/attractions}" method="GET">
-    <button type="submit">Tilbage</button>
-</form>
-
+    <div class="button">
+        <form th:action="@{/attractions}" method="GET">
+            <button type="submit">Tilbage</button>
+        </form>
+    </div>
+</div>
+</div>
 </body>
 </html>
