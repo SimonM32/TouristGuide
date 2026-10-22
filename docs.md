@@ -1,1 +1,1 @@
-[ER model](ER model.png)
+[ER model](ERmodel.png)
