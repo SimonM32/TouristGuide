@@ -1,4 +1,4 @@
 [ER model](ERmodel.png),
 
 
-[Qodana](image.png)
+[Qodana](qodanapic.png)
