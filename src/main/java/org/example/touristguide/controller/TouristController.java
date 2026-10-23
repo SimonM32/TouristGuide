@@ -42,11 +42,13 @@ import java.util.List;
             return "addAttraction";
         }
 
+
         @PostMapping("/save")
         public String saveAttractionForm(@ModelAttribute TouristAttraction touristAttraction) {
             service.addTouristAttraction(touristAttraction);
             return "redirect:/attractions";
         }
+
 
         @GetMapping("/{name}/edit")
         public String editAttraction(@PathVariable String name, Model model) {
