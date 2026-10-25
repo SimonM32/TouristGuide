@@ -16,7 +16,7 @@ public class TouristRepository {
     public TouristRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-
+/*
     //DENNE METODE VILLE OPRETTE FLERE JAVA OBJEKTER END DEN SKAL HVIS EN ATTRACTION HAR MERE END 1 TAG
     public List<TouristAttraction> getAllTouristAttractions() {
         String sql = """
@@ -27,6 +27,24 @@ public class TouristRepository {
         LEFT JOIN tags tg ON tat.tag_id = tg.tag_id
         """;
         return jdbcTemplate.query(sql, new TouristAttractionRowMapper());
+    }
+
+ */
+
+    public List<TouristAttraction> getAllTouristAttractions() {
+
+        String sql = """
+                SELECT t.touristAttraction_id, t.name, t.description, c.city AS city
+                FROM touristAttractions t
+                JOIN cities c ON t.city_id = c.city_id              
+                """;
+
+        List<TouristAttraction> attractions = jdbcTemplate.query(sql, new TouristAttractionRowMapper());
+
+        for(TouristAttraction t : attractions) {
+            t.setTags(getTagByAttraction(t.getTouristAttraction_id()));
+        }
+        return attractions;
     }
 
     public int addTouristAttraction(TouristAttraction touristAttraction) {
@@ -53,25 +71,21 @@ public class TouristRepository {
                 ),
                 name
         );
-
+        return touristAttraction;
     }
 
-    public List<String> getTagsByAttraction(int attractionID) {
+    public List<String> getTagByAttraction(int touristAttraction_id) {
+
         String sql = """
-                SELECT t.tag         
-                FROM tags t       
-                JOIN touristAttraction_tags tt ON t.tag_id = tt.tag_id
-                WHERE tt.touristAttraction_id = ?
+                SELECT t.tag
+                FROM tags t
+                JOIN touristAttraction_tags tat ON tat.tag_id = t.tag_id
+                WHERE tat.touristAttraction_id = ? 
                 """;
 
-        List hello;
-
-        return jdbcTemplate.query(
-                sql,(rs, rowNum) -> rs.getString("tag"), attractionID
-        );
-
+        return jdbcTemplate.query(sql, (rs, rowNum) -> rs.getString("tag"), touristAttraction_id);
     }
-
+}
 
     /*
     -------------------------NYT----------------------------------------------------------------

@@ -8,6 +8,16 @@ public class TouristAttraction {
     private String city;
     private List<String> tags;
 
+    private int touristAttraction_id;
+
+    public int getTouristAttraction_id() {
+        return touristAttraction_id;
+    }
+
+    public void setTouristAttraction_id() {
+        this.touristAttraction_id = touristAttraction_id;
+    }
+
     public TouristAttraction() {
 
     }
