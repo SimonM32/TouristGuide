@@ -91,7 +91,8 @@ import java.util.List;
              return ResponseEntity.status(201).body(attraction);
         }
 
-        /*
+/*
+
     @PutMapping("/update/{name}")
     public ResponseEntity<TouristAttraction> updateAttraction(@PathVariable String name, @RequestBody TouristAttraction touristAttraction) {
 
@@ -111,5 +112,7 @@ import java.util.List;
             }
         }
 
-         */
+
+
+ */
     }
