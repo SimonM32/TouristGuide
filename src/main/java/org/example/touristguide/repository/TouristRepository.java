@@ -41,7 +41,7 @@ public class TouristRepository {
 
         List<TouristAttraction> attractions = jdbcTemplate.query(sql, new TouristAttractionRowMapper());
 
-        for(TouristAttraction t : attractions) {
+        for (TouristAttraction t : attractions) {
             t.setTags(getTagByAttraction(t.getTouristAttraction_id()));
         }
         return attractions;
@@ -52,27 +52,85 @@ public class TouristRepository {
                 INSERT INTO touristattractions (city_id, name, description)
                 VALUES((SELECT city_id FROM cities WHERE city = ?), ?, ?)
                 """;
-        return jdbcTemplate.update(sql,touristAttraction.getCity(), touristAttraction.getName(), touristAttraction.getDescription());
+        return jdbcTemplate.update(sql, touristAttraction.getCity(), touristAttraction.getName(), touristAttraction.getDescription());
     }
 
     public TouristAttraction getTouristAttractionByName(String name) {
         String sql = """
-                SELECT name, description, c.city 
+                SELECT t.touristAttraction_id, t.name, t.description, c.city AS city
                 FROM touristAttractions t
-                JOIN cities c ON t.city_id = c.city_id
+                JOIN cities c ON t.city_id = c.city_id               
                 WHERE t.name = ?
                 """;
-        TouristAttraction touristAttraction = jdbcTemplate.queryForObject(
-                sql, (rs, rowNum) -> new TouristAttraction(
+
+        List<TouristAttraction> result = jdbcTemplate.query(sql,
+                (rs, rowNum) -> new TouristAttraction(
                         rs.getString("name"),
                         rs.getString("description"),
                         rs.getString("city"),
-                        new ArrayList<>()
-                ),
-                name
-        );
-        return touristAttraction;
+                        getTagByAttraction(rs.getInt("touristAttraction_id"))
+                ), name);
+        return result.isEmpty() ? null : result.get(0);
     }
+
+    public int updateTouristAttraction(TouristAttraction t) {
+
+        String sql = """
+                UPDATE touristAttractions
+                SET city_id = (
+                    SELECT city_id
+                    FROM cities
+                    WHERE city = ?
+                ),
+                    name = ?,
+                    description = ?
+                WHERE touristAttraction_id = ?    
+                """;
+
+        return jdbcTemplate.update(sql, t.getCity(), t.getName(), t.getDescription(), t.getTouristAttraction_id());
+    }
+
+    public void updateTag(TouristAttraction t) {
+
+        int attractionID = t.getTouristAttraction_id();
+
+        String deletedSQL = """
+                DELETE
+                FROM touristAttractions
+                WHERE touristAttraction_id = ?
+                """;
+
+        jdbcTemplate.update(deletedSQL, attractionID);
+
+        String insertSQL = """
+                INSERT INTO touristAttraction_tags (touristAttraction_id, tag_id)
+                SELECT ?, tag_id
+                FROM tags
+                WHERE tag = ?
+                """;
+
+        for (String tag : t.getTags()) {
+            int rows = jdbcTemplate.update(insertSQL, attractionID, tag);
+
+
+            if (rows != 1) {
+                throw new IllegalArgumentException(
+                        "Tag not found " + tag
+                );
+            }
+        }
+    }
+
+    public int deleteTouristAttractionByName(String name) {
+
+        String sql = """
+                DELETE 
+                FROM touristAttractions 
+                WHERE name = ?
+                """;
+        return jdbcTemplate.update(sql, name);
+    }
+
 
     public List<String> getTagByAttraction(int touristAttraction_id) {
 
@@ -85,13 +143,33 @@ public class TouristRepository {
 
         return jdbcTemplate.query(sql, (rs, rowNum) -> rs.getString("tag"), touristAttraction_id);
     }
-}
 
+
+    public List<String> getTags() {
+
+        String sql = """
+                SELECT tag
+                FROM tags
+                """;
+
+        return jdbcTemplate.query(sql, (rs, rowNum) -> rs.getString("tag"));
+    }
+
+    public List<String> getCities() {
+
+        String sql = """
+                SELECT city
+                FROM cities
+                """;
+
+        return jdbcTemplate.query(sql, (rs, rowNum) -> rs.getString("city"));
+    }
+}
     /*
     -------------------------NYT----------------------------------------------------------------
      */
 
-    /*
+  /*
     private final List<TouristAttraction> touristAttractions = new ArrayList<>(List.of(
             new TouristAttraction("Den lille havfrue", "En meget fin statue","København", List.of("Historie")),
             new TouristAttraction("Noma", "Der er god mad","København",List.of("Mad og drikke")),
@@ -181,4 +259,5 @@ public class TouristRepository {
         return attraction;
     }
 }
-*/
+
+   */

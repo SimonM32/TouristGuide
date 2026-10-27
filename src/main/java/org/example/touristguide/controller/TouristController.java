@@ -32,9 +32,7 @@ import java.util.List;
 
         @GetMapping("/add")
         public String addAttractionForm(Model model) {
-            List<String> startTags = service.getTags(); // Måske ikke bruge linje
             TouristAttraction touristAttraction = new TouristAttraction();
-            touristAttraction.setTags(startTags); // Måske ikke bruge linje
             model.addAttribute("allTags", service.getTags());
 
             model.addAttribute("addedAttraction", touristAttraction);
@@ -59,13 +57,13 @@ import java.util.List;
         }
 
         @PostMapping("/update")
-        public String updateAttraction(@ModelAttribute TouristAttraction updatedAttraction, @RequestParam String oldName) {
-            service.updateAttraction(oldName,updatedAttraction);
+        public String updateAttraction(@ModelAttribute TouristAttraction updatedAttraction) {
+            service.updateAttraction(updatedAttraction);
             return "redirect:/attractions";
         }
         @PostMapping("/attractions/{name}/delete")
         public String deleteAttraction(@PathVariable String name, Model model){
-            TouristAttraction deleted = service.deleteTouristAttractionByName(name);
+            int deleted = service.deleteTouristAttractionByName(name);
             model.addAttribute("deletedAttraction", deleted);
             return "deleted";
         }
@@ -93,6 +91,7 @@ import java.util.List;
              return ResponseEntity.status(201).body(attraction);
         }
 
+        /*
     @PutMapping("/update/{name}")
     public ResponseEntity<TouristAttraction> updateAttraction(@PathVariable String name, @RequestBody TouristAttraction touristAttraction) {
 
@@ -100,13 +99,17 @@ import java.util.List;
         return ResponseEntity.ok(updatedAttraction);
     }
 
+
+
         @DeleteMapping("delete/{name}")
         public ResponseEntity<TouristAttraction> deleteTouristAttractionByName(@PathVariable String name) {
-            TouristAttraction deletedAttraction = service.deleteTouristAttractionByName(name);
-            if(deletedAttraction != null) {
+            int deletedAttraction = service.deleteTouristAttractionByName(name);
+            if(deletedAttraction != 0) {
                 return ResponseEntity.ok(deletedAttraction);
             } else {
                 return ResponseEntity.notFound().build();
             }
         }
+
+         */
     }

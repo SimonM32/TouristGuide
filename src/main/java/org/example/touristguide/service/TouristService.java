@@ -3,6 +3,7 @@ package org.example.touristguide.service;
 import org.example.touristguide.model.TouristAttraction;
 import org.example.touristguide.repository.TouristRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,6 +16,8 @@ public class TouristService {
         this.repository = repository;
     }
 
+
+
     public List<String> getCities() {
         return repository.getCities();
     }
@@ -22,6 +25,9 @@ public class TouristService {
     public List<String> getTags() {
         return repository.getTags();
     }
+
+
+
 
     public List<TouristAttraction> getAllTouristAttractions() {
         return repository.getAllTouristAttractions();
@@ -36,6 +42,7 @@ public class TouristService {
         this.repository.addTouristAttraction(touristAttraction);
     }
 
+    /*
     public TouristAttraction updateTouristAttractionByName(String oldName, String newName, String newDescription) {
         return repository.updateTouristAttractionByName(oldName, newName, newDescription);
     }
@@ -43,8 +50,16 @@ public class TouristService {
     public TouristAttraction updateAttraction(String oldName, TouristAttraction updatedAttraction) {
         return repository.updateAttraction(oldName, updatedAttraction);
     }
+     */
 
-    public TouristAttraction deleteTouristAttractionByName(String name) {
+    @Transactional
+    public void updateAttraction(TouristAttraction t) {
+        repository.updateTouristAttraction(t);
+        repository.updateTag(t);
+
+    }
+
+    public int deleteTouristAttractionByName(String name) {
         return repository.deleteTouristAttractionByName(name);
     }
 }
