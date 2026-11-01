@@ -1,62 +1,97 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-
 name: Build and deploy JAR app to Azure Web App - touristguidenapp
 
 on:
   push:
     branches:
-      - 'main'
+      - main
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     permissions:
       contents: read
 
     steps:
-      - uses: actions/checkout@v4
+      # Checkout source code
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
+      # Setup Java 21
       - name: Set up Java version
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'microsoft'
+          cache: maven
 
+      # Build application and run tests
       - name: Build with Maven
         run: mvn clean install
 
+      # Display test reports even if Maven fails
       - name: Display test reports
         if: always()
         run: |
           echo "===== Surefire Reports ====="
+
           if [ -d target/surefire-reports ]; then
-            cat target/surefire-reports/*.txt
+
+            echo "===== Available Report Files ====="
+            find target/surefire-reports -maxdepth 1 -type f -print
+
+            echo "===== Test Error Details ====="
+            for file in target/surefire-reports/*.txt; do
+              if [ -f "$file" ]; then
+                echo "================================"
+                echo "FILE: $file"
+                cat "$file"
+              fi
+            done
+
           else
             echo "No Surefire reports found."
           fi
 
+      # Upload test reports even if tests fail
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: maven-test-reports
+          path: target/surefire-reports/
+          if-no-files-found: warn
+
+      # Upload JAR for deployment
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: java-app
-          path: '${{ github.workspace }}/target/*.jar'
+          path: target/*.jar
+          if-no-files-found: error
 
   deploy:
     runs-on: ubuntu-latest
+
     needs: build
+
     permissions:
       id-token: write
       contents: read
 
     steps:
+      # Download JAR
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: java-app
+          path: .
 
+      # Login to Azure
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -64,10 +99,11 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_5D190550BE6945E6AA2474B88F64AEC7 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_28FCA0F3BF0342118640E5E985A9ED94 }}
 
+      # Deploy to Azure Web App
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'touristguidenapp'
-          slot-name: 'Production'
+          app-name: touristguidenapp
+          slot-name: Production
           package: '*.jar'
