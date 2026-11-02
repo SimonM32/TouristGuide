@@ -6,67 +6,58 @@ name: Build and deploy JAR app to Azure Web App - touristguidenapp
 on:
   push:
     branches:
-      - main
+      - 'main'
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     permissions:
-      contents: read
-
-    env:
-      DEV_DB_URL: ${{ secrets.DEV_DB_URL }}
-      DEV_DB_USERNAME: ${{ secrets.DEV_DB_USERNAME }}
-      DEV_DB_PASSWORD: ${{ secrets.DEV_DB_PASSWORD }}
+      contents: read #This is required for actions/checkout
 
     steps:
-      # Checkout source code
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      # Setup Java 21
       - name: Set up Java version
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'microsoft'
-          cache: maven
 
-      # Build application and run tests
       - name: Build with Maven
         run: mvn clean install
 
-      # Display test reports even if Maven fails
-      - name: Display test reports
-        if: always()
-        run: |
-          echo "===== Surefire Reports ====="
-
-          if [ -d target/surefire-reports ]; then
-            echo "===== Available Report Files ====="
-            find target/surefire-reports -maxdepth 1 -type f -print
-
-            echo "===== Test Error Details ====="
-            for file in target/surefire-reports/*.txt; do
-              if [ -f "$file" ]; then
-                echo "================================"
-                echo "FILE: $file"
-                cat "$file"
-              fi
-            done
-          else
-            echo "No Surefire reports found."
-          fi
-
-      # Upload test reports even if tests fail
-      - name: Upload test reports
-        if: always()
+      - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: maven-test-reports
-          path: target/surefire-reports/
-          if-no-files-found: warn
+          name: java-app
+          path: '${{ github.workspace }}/target/*.jar'
 
-     
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      id-token: write #This is required for requesting the JWT
+      contents: read #This is required for actions/checkout
+  
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v4
+        with:
+          name: java-app
+      
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_1118D3B1EE0F497F9B31CE14BAD933EF }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_6E524799DB384DE49B1DC4A2EC623AE2 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_4A08CDFFE83C493E84338917DA23E2E3 }}
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'touristguidenapp'
+          slot-name: 'Production'
+          package: '*.jar'
+          
