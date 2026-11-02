@@ -53,6 +53,7 @@ public class TouristControllerTest {
         verify(touristService).getAllTouristAttractions();
     }
 
+
     @Test
     void shouldAddAttraction() throws Exception {
 
