@@ -58,7 +58,6 @@ public class TouristService {
     public void updateAttraction(TouristAttraction t) {
         repository.updateTouristAttraction(t);
         repository.updateTag(t);
-
     }
 
     public int deleteTouristAttractionByName(String name) {
